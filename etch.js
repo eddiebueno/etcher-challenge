@@ -1,18 +1,32 @@
+'use strict';
 // Add Event Listeners here:
+function listenOnHover(){
+  $('.grid').on('mouseover','.cell:not(.active)',function(e){
+    $(e.target).focus();
+  });
+}
 
+function listenOnFocus(){
+  $('.grid').on('focus','.cell:not(.active)',function(e){
+    $(e.target).addClass('active');
+  });
+}
+
+function handleRedrawGridBtn(){
+  $('.controls button').on('click',function(e){
+    createAndPlaceRows(8);
+  });
+}
 
 // When DOM is ready:
 $(() => {
   createAndPlaceRows(8);
 
   // Bind your event listeners here:
+  listenOnHover();
+  listenOnFocus();
+  handleRedrawGridBtn();
 });
-
-
-
-
-
-
 
 // ===============================
 // Code below is to automate grid creation
@@ -20,7 +34,8 @@ $(() => {
 // ===============================
 function createRow(cellCount) {
   let row = '<div class="row">';
-  let str = '<div class="cell">&nbsp;</div>';
+  let str = '<button class="cell">&nbsp;</button>'; 
+  // ^ changed div to button to allow focus for both mouseover & keyboard
   for (let i = 0; i < cellCount; i++) {
     row += str;
   }

@@ -1,5 +1,12 @@
 'use strict';
 // Add Event Listeners here:
+function listenKeyPress(){
+  $(document).on('keydown','.cell:focus',function(e){
+    e.preventDefault();
+    console.log(e.which);
+  });
+}
+
 function listenOnHover(){
   $('.grid').on('mouseover','.cell:not(.active)',function(e){
     $(e.target).focus();
@@ -26,6 +33,9 @@ $(() => {
   listenOnHover();
   listenOnFocus();
   handleRedrawGridBtn();
+
+  //Testing Keyboard functionality
+  listenKeyPress();
 });
 
 // ===============================
